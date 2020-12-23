@@ -614,6 +614,7 @@ class GrpcPuppet(puppetOptions: PuppetOptions) : Puppet(puppetOptions) {
         val request = Message.MessageSendTextRequest.newBuilder()
             .setConversationId(conversationId)
             .setText(text)
+            .addAllMentonalIds(mentionList)
             .build()
 
         return CompletableFuture.supplyAsync {
