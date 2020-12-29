@@ -3,10 +3,8 @@ package io.github.wechaty.user
 import io.github.wechaty.Accessory
 import io.github.wechaty.Wechaty
 import io.github.wechaty.schemas.FriendshipPayload
-import io.github.wechaty.schemas.FriendshipSearchCondition
 import io.github.wechaty.schemas.FriendshipType
 import io.github.wechaty.utils.JsonUtils
-import org.apache.commons.lang3.StringUtils
 import org.slf4j.LoggerFactory
 
 class Friendship (wechaty: Wechaty,val id:String):Accessory(wechaty){
@@ -50,7 +48,7 @@ class Friendship (wechaty: Wechaty,val id:String):Accessory(wechaty){
 
     fun hello():String{
         if(payload==null){
-            throw Exception("ne payload")
+            throw Exception("no payload")
         }
         return this.payload?.hello ?: "";
     }
@@ -61,9 +59,13 @@ class Friendship (wechaty: Wechaty,val id:String):Accessory(wechaty){
 
     fun toJson():String{
         if(payload==null){
-            throw Exception("ne payload")
+            throw Exception("no payload")
         }
         return JsonUtils.write(payload!!);
+    }
+
+    fun getType():FriendshipType{
+        return payload?.type ?: throw Exception("no payload")
     }
 
     companion object{
